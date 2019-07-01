@@ -19,6 +19,12 @@ public:
     QSerialPort *port;
     QSerialPortInfo *portinfo;
     QList<QSerialPortInfo> ports;
+    void savedata(QByteArray data);
+    void getMsg(QByteArray datablock);
+    int blocknum=0;
+    int totalblocknum=0;
+    QString filename;
+    int byteToInt2(QByteArray b,int length);
 private slots:
     void onSavePathClicked();
     void Read_Data();
