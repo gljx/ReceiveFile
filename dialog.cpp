@@ -14,6 +14,7 @@ Dialog::Dialog(QWidget *parent) :
     port->setPort(ports.at(1));
     port->setPortName(ports.at(1).systemLocation());
     ui->setupUi(this);
+    this->setWindowTitle("串口文件接受工具Ver1.0-高刘觉曦版权所有!");
     connect(ui->SavePathBtn,SIGNAL(clicked()),this,SLOT(onSavePathClicked()));
     QObject::connect(port,&QSerialPort::readyRead,this,&Dialog::Read_Data);
 }
