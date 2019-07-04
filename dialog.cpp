@@ -30,24 +30,26 @@ void Dialog::Read_Data(){
         if(blocknum==0){
             qDebug()<<"LOG1:"<<blocknum<<endl;
             getMsg(datablock);
-            blocknum++;
             qDebug()<<"LOG7:"<<blocknum<<endl;
         }
         if(blocknum==totalblocknum){
             qDebug()<<"LOG2:"<<blocknum<<endl;
-            ui->textLog->append("传输完毕\n");
-            blocknum=0;
-            totalblocknum=0;
         }else{
             qDebug()<<"LOG3:"<<blocknum<<endl;
-            if(blocknum!=0){
+            if(blocknum>0){
                 qDebug()<<"LOG4:"<<blocknum<<endl;
                savedata(datablock);
                qDebug()<<"LOG5:"<<blocknum<<endl;
             }
 
         }
+        blocknum++;
         qDebug()<<"LOG6:"<<blocknum<<endl;
+        if(blocknum==totalblocknum){
+            ui->textLog->append("传输完毕\n");
+            blocknum=0;
+            totalblocknum=0;
+        }
 }
 
 void Dialog::onSavePathClicked(){
@@ -75,7 +77,6 @@ void Dialog::savedata(QByteArray data){
         ui->textLog->append("正在保存第"+QString("%1").arg(blocknum)+"块\n");
         file.write(data);
         file.close();
-        blocknum++;
         qDebug()<<"file download"<<endl;
     }
 }
